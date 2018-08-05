@@ -1,0 +1,177 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+
+
+html {
+	margin-left: auto;
+	margin-right: auto;
+	height: 100%;
+}
+header, nav, section, article, aside, footer {
+	display: block;
+}
+body {
+	font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
+	height: 100%;
+	background: white;
+
+
+}
+
+#left {
+	position: absolute;
+	left: 0px;
+	width: 10em;
+	background: red;
+	height: 100%;
+
+}
+
+a {
+	color: blue;
+	outline: none;
+	text-decoration: underline;
+}
+a:hover {
+	text-decoration: none;
+}
+p {
+	margin: 0 0 18px
+}
+img {
+	border: none;
+}
+input {
+	vertical-align: middle;
+	border: 1px solid black;
+	font-size: 1.4em;
+	margin-bottom: .2em;
+}
+#wrapper {
+    position: relative;
+    margin-bottom: auto;
+    min-height: 100%;
+    max-width: 1000px;
+    margin-left: auto; 
+    margin-right: auto;
+    height: auto !important;
+}
+
+.subtitle button {font-size: 1em;}
+button {
+	font-family: 'Love Ya Like A Sister', cursive;
+	font-size: 1.4em;
+	padding: .3em;
+}
+
+/* Header
+-----------------------------------------------------------------------------*/
+#header {
+	font-family: 'Love Ya Like A Sister', cursive;
+	height: 5em;
+	color: black;
+	margin-bottom: 2em;
+}
+
+#sestinamatic {
+    padding-top:.1em;
+	font-size:4em;
+	line-height: 1em;
+	padding-left: .2em;
+}
+
+.subtitle {
+	font-family: 'Love Ya Like A Sister', cursive;
+	font-size: 18px;
+	line-height: 0em;
+	padding-left: 8em;
+}
+ #subtitle2 {display: none;}
+
+
+
+
+#content {
+    overflow: auto;
+    padding-bottom: 160px;
+    font-size: 18px;
+}
+
+#build2 {
+    display: none;
+}
+
+#browse { display:none;}
+
+#submit {
+width: 100%;
+}
+.formlabel {width: 5.5em; display: inline-block;
+	font-family: 'Love Ya Like A Sister', cursive;
+
+}
+#buildtext {
+    width: 100%;
+    min-height: 30em;
+}
+
+#build1 {
+  margin-top: 2em;
+}
+.build, #browse{
+    float: left;
+    width: 60%;
+
+    margin-top: 2em;
+    margin-left: 2em;
+    background-color: rgba(255,255,255,0.9);
+
+}
+
+#intro, #rhyming {
+    font-size: .7em;
+    width: 300px;
+}
+
+/* Sidebar Right
+-----------------------------------------------------------------------------*/
+#browse {
+    display: none;
+}
+
+
+/* Footer
+-----------------------------------------------------------------------------*/
+#footer {
+    position: absolute;
+    height: 150px;
+    bottom: 0px;
+    width: 100%;
+    background: black;
+    background-image: url(typewriter_strop.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+}
+
+span.title {
+	font-family: 'Love Ya Like A Sister', cursive;
+	font-size: 1.5em;
+}
+
+div.body {
+  margin-top: 0em;
+  margin-bottom:2em;
+  line-height: 1.2em;
+}
+
+#view {display: none; margin-top: 2em;}
+.getpoem:hover {cursor:pointer;}
+.getpoem {
+    color: black;
+  text-decoration: underline;
+  
+}

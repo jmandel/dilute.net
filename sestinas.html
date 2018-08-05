@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Sestinas: browse or build your own</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" > 
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+    <link rel="apple-touch-icon" href="sestinas/ipad-icon.jpg"/> 
+    <link rel="apple-touch-startup-image" href="sestinas/ipad-icon.jpg"/> 
+ 
+	<link rel="stylesheet" href="sestinas/style.css" type="text/css" media="screen, projection" />
+<link href='http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1923313-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div id="wrapper">
+
+	<header id="header">
+	  <div id="sestinamatic">sestin-a-matic:</div>
+	  <div class="subtitle"><button class="browse_button">browse</button> or <button class="build_button" disabled>build your own</button></div>
+	</header><!-- #header-->
+
+
+	<div id="content">
+
+<div id="browse">
+
+			<div id="archive"></div>
+</div><!-- #sideRight -->
+
+
+	  <div id="view" class="build">
+
+	    <span class='title'></span><span class='author'></span><br><br><div class='body'></div>
+
+            <span class="subtitle"><button class="browse_button">browse</button> or <button class="build_button">build your own</button></span>
+	  </div>
+
+	  <div id="build2" class="build">
+
+	    <textarea id="buildtext"></textarea>
+
+	    <span class="formlabel">Title</span>
+	    <input id="buildtitle" type="text" placeholder="Super-sestina"><br>
+
+	    <span class="formlabel">Your name</span>
+	    <input id="buildname" type="text" placeholder="Suzie Q."><br>
+	    <span class="formlabel">Your e-mail</span>
+	    <input id="buildemail" type="text" placeholder="no-spam@gmail.com"><br>
+	    <button id="submit">submit to archive</button>
+		  
+	  </div>
+
+		<div id="build1" class="build">		  
+		  <input id="kw1" AUTOFOCUS type="text" placeholder="1st keyword"><br>
+		  <input id="kw2" type="text" placeholder="2nd keyword"><br>
+		  <input id="kw3" type="text" placeholder="3rd keyword"><br>
+		  <input id="kw4" type="text" placeholder="4th keyword"><br>
+		  <input id="kw5" type="text" placeholder="5th keyword"><br>
+		  <input id="kw6" type="text" placeholder="6th keyword"><br>
+		  <button id="submit_standard">standard</button> or 
+		  <button id="submit_rhyming">rhyming</button><br><span id='rhyming'> (Rhyming means words 1,3,5 rhyme; and words 2,4,6.)</span>
+<br><br>
+<div id="intro">		  
+<strong>About:</strong> I made this page because I can never remember the order of lines in a sestina. You can use it to generate a template for your own sestinas, or see what others have written. Please note that the collection is moderated.<br>
+&#8212;<i>Josh Mandel, <span id='thisYear'>2011</span></i>
+</div>
+
+</div>
+
+
+
+	</div><!-- #content-->
+
+
+
+<footer id="footer">
+ 
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script>
+
+  $("#thisYear").text(new Date().getFullYear());
+  var apikey = "4fc6f122e4b";
+  apikey += "043bb5a9f7220";
+
+  var get_keywords = function() {
+    var kw = [
+$("#kw1").val(), 
+$("#kw2").val(), 
+$("#kw3").val(), 
+$("#kw4").val(), 
+$("#kw5").val(), 
+$("#kw6").val()
+];
+
+  return kw;
+  }
+
+
+  $("#submit_standard").click(function() {
+    var t = standard_template;
+    var kws = get_keywords();
+    $.each(kws, function(i,v) {
+      t = t.replace(RegExp("kw"+(i+1), "g"), v);
+    });
+    sestina_type = "standard";
+  $("#buildtext").val(t);
+
+  window.location.hash = "compose";
+
+  });
+
+
+  $("#submit_rhyming").click(function() {
+    var t = rhyming_template;
+    var kws = get_keywords();
+    $.each(kws, function(i,v) {
+      t = t.replace(RegExp("kw"+(i+1), "g"), v);
+    });
+   sestina_type = "rhyming";
+
+  $("#buildtext").val(t);
+  window.location.hash = "compose";
+
+  });
+
+  $("#submit").click(function(){
+    var pl = {
+  title:$("#buildtitle").val(), 
+  name:$("#buildname").val(), 
+  email:$("#buildemail").val(), 
+  body:$("#buildtext").val(), 
+  keyword: get_keywords(),
+  type: sestina_type
+  };
+
+
+  var notdone = ""; 
+  if (pl.body.split(/\s/).length < 195) {
+     notdone  += "finish poem";
+  }
+
+  var elipses = pl.body.match(/\.\.\./g);
+  if (elipses && elipses.length > 10) {
+     var comma = (notdone != "") ? ", ": "";
+     notdone  += comma + "remove '...'";
+  }
+
+  if (notdone != "") {
+     $("#submit").text(notdone  + ", then submit");
+     return false;
+  }
+
+
+    $("#submit").text("submit to archive");
+
+		$.ajax({url: "https://api.mongolab.com/api/1/databases/sestinas/collections/sestinas?apiKey="+apikey,
+			 data: JSON.stringify(pl),
+			 type: "POST",
+			 contentType: "application/json"})
+		.success(function(data, status, datatype){
+      do_view(data._id.$oid)
+    });
+
+    $("#build2").hide();
+    $("#build1").fadeIn();
+    
+  });
+
+var standard_template = "# Use the template below to create a sestina.\n\
+# Your job:  replace the  '...'  with poetic greatness!\n\
+# Each line should end with the word shown below.\n\
+# (Lines starting with '#' are stripped from your poem.)\n\
+\n\
+# Stanza 1\n\
+... kw1\n\
+... kw2\n\
+... kw3\n\
+... kw4\n\
+... kw5\n\
+... kw6\n\
+\n\
+# Stanza 2\n\
+... kw6\n\
+... kw1\n\
+... kw5\n\
+... kw2\n\
+... kw4\n\
+... kw3\n\
+\n\
+# Stanza 3\n\
+... kw3\n\
+... kw6\n\
+... kw4\n\
+... kw1\n\
+... kw2\n\
+... kw5\n\
+\n\
+# Stanza 4\n\
+... kw5\n\
+... kw3\n\
+... kw2\n\
+... kw6\n\
+... kw1\n\
+... kw4\n\
+\n\
+# Stanza 5\n\
+... kw4\n\
+... kw5\n\
+... kw1\n\
+... kw3\n\
+... kw6\n\
+... kw2\n\
+\n\
+# Stanza 6\n\
+... kw2\n\
+... kw4\n\
+... kw6\n\
+... kw5\n\
+... kw3\n\
+... kw1\n\
+\n\
+# Envoi (includes two keywords per line!)\n\
+... kw2 ... kw5\n\
+... kw4 ... kw3\n\
+... kw6 ... kw1";
+
+
+var rhyming_template = "# Use the template below to create a sestina.\n\
+# Your job:  replace the  '...'  with poetic greatness!\n\
+# Each line should end with the word shown below.\n\
+# (Lines starting with '#' are stripped from your poem.)\n\
+\n\
+# Stanza 1\n\
+... kw1\n\
+... kw2\n\
+... kw3\n\
+... kw4\n\
+... kw5\n\
+... kw6\n\
+\n\
+# Stanza 2\n\
+... kw6\n\
+... kw1\n\
+... kw4\n\
+... kw3\n\
+... kw2\n\
+... kw5\n\
+\n\
+# Stanza 3\n\
+... kw5\n\
+... kw6\n\
+... kw1\n\
+... kw4\n\
+... kw3\n\
+... kw2\n\
+\n\
+# Stanza 4\n\
+... kw2\n\
+... kw5\n\
+... kw6\n\
+... kw1\n\
+... kw4\n\
+... kw3\n\
+\n\
+# Stanza 5\n\
+... kw3\n\
+... kw2\n\
+... kw1\n\
+... kw6\n\
+... kw5\n\
+... kw4\n\
+\n\
+# Stanza 6\n\
+... kw4\n\
+... kw3\n\
+... kw2\n\
+... kw5\n\
+... kw6\n\
+... kw1\n\
+\n\
+# Envoi (includes two keywords per line!)\n\
+... kw1 ... kw4\n\
+... kw2 ... kw3\n\
+... kw5 ... kw6"
+$.get("https://api.mongolab.com/api/1/databases/sestinas/collections/sestinas?&f={'_id':1,'title':1,'keyword':1}&apiKey="+apikey)
+.success(function(data) {
+   a = $("#archive");
+   var r = [];
+   $.each(data, function(i, d) {
+     if (!d.keyword) d.keyword = [];
+     r.push("<a href='sestinas.html#id="+d._id.$oid+"' id='"+d._id.$oid+"' class='getpoem'>"+d.title + " ("+ d.keyword.join(", ")+")</a>");
+   });
+
+   a.html("<ul><li>"+r.join("</li><li>")+"</li></ul>");
+});
+
+function do_view(id) {
+	$.get("https://api.mongolab.com/api/1/databases/sestinas/collections/sestinas/"+id+"?apiKey="+apikey)
+	.success(function(data) {
+    $(".build").hide();
+    window.location.hash = "id="+data._id.$oid+"";
+    var lines = data.body.split("\n");
+    var pared = $.grep(lines, function(l){return l.match(/^\s*#/);}, true);
+    $("#view .title").text(data.title+": ");
+    var aline =  "a " + (data.type ? data.type : "") + " sestina by " + data.name;
+    $("#view .author").text(aline);
+    $("#view .body").html(pared.join("<br>"));
+    $("#view").fadeIn();    
+  });
+};
+
+$(".browse_button").click(function(){
+    window.location.hash = "browse";
+});
+
+$(".build_button").click(function(){
+    window.location.hash = "";
+});
+
+var dispatch = function() {
+
+  if (window.location.hash == "") {
+     $("#view").hide();
+     $(".build").hide();
+     $("#browse").hide();
+     $(".browse_button").removeAttr("disabled");
+     $(".build_button").attr("disabled", "true");
+     $("#subtitle1").show();
+     $("#subtitle2").hide();
+     $("#build1").fadeIn();
+     return;
+  };
+
+  if (window.location.hash == "#compose") {
+     $("#view").hide();
+     $(".build").hide();
+     $("#browse").hide();
+
+     $(".browse_button").removeAttr("disabled");
+     $(".build_button").attr("disabled", "true");
+
+     $("#build2").fadeIn();
+     return;
+  };
+
+  if (window.location.hash == "#browse") {
+     $("#view").hide();
+     $(".build").hide();
+
+     $("#browse").fadeIn();
+
+     $(".browse_button").attr("disabled", "true");
+     $(".build_button").removeAttr("disabled");
+
+     return;
+  };
+
+
+  var id= window.location.hash.split("=")[1];
+  if (id) {
+     $("#view").hide();
+     $(".build").hide();
+
+
+     $(".build_button").removeAttr("disabled");
+     $(".browse_button").removeAttr("disabled");
+
+     $("#browse").hide();
+    return do_view(id);
+  }
+
+}
+
+$(window).bind( 'hashchange', dispatch);
+
+if (window.location.hash) {
+  dispatch();
+}
+
+</script>
+</body>
+</html>

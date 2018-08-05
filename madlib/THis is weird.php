@@ -1,0 +1,16 @@
+<html>
+<body bgcolor=#ffffff>
+Please fill in all blanks before proceeding.<form action=THis%20is%20weird.php method=get><table>
+<tr><td>candy</td><td><input type=text name=item0 value=""></td></tr>
+<tr><td>adj</td><td><input type=text name=item1 value=""></td></tr>
+<tr><td>adj</td><td><input type=text name=item2 value=""></td></tr>
+<tr><td>medecine</td><td><input type=text name=item3 value=""></td></tr>
+<tr><td>form of eating</td><td><input type=text name=item4 value=""></td></tr>
+<tr><td>name</td><td><input type=text name=item5 value=""></td></tr>
+<tr><td>town name</td><td><input type=text name=item6 value=""></td></tr>
+<tr><td>body part</td><td><input type=text name=item7 value=""></td></tr>
+<tr><td>bodily function</td><td><input type=text name=item8 value=""></td></tr>
+
+</table><br><input type=submit name=submit value="mad my lib!">
+</form>
+<a href="../madlib.php">go back...</a></body>
