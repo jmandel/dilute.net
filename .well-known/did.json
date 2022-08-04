@@ -1,0 +1,48 @@
+{
+  "id": "did:web:dilute.net",
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    {
+      "@base": "did:web:dilute.net"
+    }
+  ],
+  "service": [
+    {
+      "id": "#linkeddomains",
+      "type": "LinkedDomains",
+      "serviceEndpoint": {
+        "origins": [
+          "https://dilute.net/"
+        ]
+      }
+    },
+    {
+      "id": "#hub",
+      "type": "IdentityHub",
+      "serviceEndpoint": {
+        "instances": [
+          "https://hub.did.msidentity.com/v1.0/d7a0a853-37bc-48c2-b0dd-1871bd89c615"
+        ]
+      }
+    }
+  ],
+  "verificationMethod": [
+    {
+      "id": "#0f92d0f0f3a04cf0aebbee4e16333282vcSigningKey-5a7aa",
+      "controller": "did:web:dilute.net",
+      "type": "EcdsaSecp256k1VerificationKey2019",
+      "publicKeyJwk": {
+        "crv": "secp256k1",
+        "kty": "EC",
+        "x": "cUsutdl0vAO4CD8pEw4_GMCjVQoK2Co-9uOCFLHNaJM",
+        "y": "i_gyfSmukuzIZubSPDLYzE6Z-SNUHTbNXnT_mgzzxBs"
+      }
+    }
+  ],
+  "authentication": [
+    "#0f92d0f0f3a04cf0aebbee4e16333282vcSigningKey-5a7aa"
+  ],
+  "assertionMethod": [
+    "#0f92d0f0f3a04cf0aebbee4e16333282vcSigningKey-5a7aa"
+  ]
+}
